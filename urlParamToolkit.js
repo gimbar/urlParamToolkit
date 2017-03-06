@@ -5,7 +5,9 @@ function addUrlParam(urlParams, paramName, ParamValue){
 
   if(paramName && paramValue){
     newUrlParams += newUrlParams.length > 0 ? "&" : "?";
-    newUrlParams += paramName + encodeURIcomponent(ParamValue);
+    newUrlParams += paramName;
+    newUrlParams += "=";
+    newUrlParams += encodeURIcomponent(ParamValue);
   }
   return newUrlParams;
 }
@@ -13,12 +15,13 @@ function addUrlParam(urlParams, paramName, ParamValue){
 function removeUrlParam (urlParams, paramName){
   var params = urlParams.substring(1).split("&");
 
-  var newUrlParams = "?";
+  var newUrlParams = "";
 
   for (var i = 0; i < params.length; i++){
     var param = params[i].split("=");
     if(param[0] != paramName){
-      newUrlParams += urlParams[i];
+      newUrlParams += newUrlParams.length > 0 ? "&" : "?";
+      newUrlParams += params[i];
     }
   }
 
